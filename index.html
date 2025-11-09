@@ -52,7 +52,7 @@
 window.addEventListener("DOMContentLoaded", () => {
   // Restore saved answers
   questions.forEach((q, i) => {
-    const saved = localStorage.getItem(`question-${i}`);
+    const saved = localStorage.getItem(`question_lin_dp-${i}`);
     if (saved !== null) {
       const selected = saved === "true";
       const trueBtn = document.getElementById(`true-${i}`);
@@ -95,7 +95,7 @@ window.addEventListener("DOMContentLoaded", () => {
   // Override checkAnswer to save answers automatically
   const originalCheck = window.checkAnswer;
   window.checkAnswer = function(index, selected) {
-    localStorage.setItem(`question-${index}`, selected);
+    localStorage.setItem(`question_lin_dp-${index}`, selected);
     originalCheck(index, selected);
   };
 });

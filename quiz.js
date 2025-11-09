@@ -1,41 +1,41 @@
 const questions = [
   // A 
-  { question: "A $\\implies$ B", answer: true },
-  { question: "A $\\implies$ C", answer: true },
-  { question: "A $\\implies$ D", answer: false },
-  { question: "A $\\implies$ E", answer: false },
-  { question: "A $\\implies$ F", answer: true },
+  { question_lin_dp: "A $\\implies$ B", answer: true },
+  { question_lin_dp: "A $\\implies$ C", answer: true },
+  { question_lin_dp: "A $\\implies$ D", answer: false },
+  { question_lin_dp: "A $\\implies$ E", answer: false },
+  { question_lin_dp: "A $\\implies$ F", answer: true },
   // B 
-  { question: "B $\\implies$ A", answer: false },
-  { question: "B $\\implies$ C", answer: false },
-  { question: "B $\\implies$ D", answer: false },
-  { question: "B $\\implies$ E", answer: false },
-  { question: "B $\\implies$ F", answer: false },
+  { question_lin_dp: "B $\\implies$ A", answer: false },
+  { question_lin_dp: "B $\\implies$ C", answer: false },
+  { question_lin_dp: "B $\\implies$ D", answer: false },
+  { question_lin_dp: "B $\\implies$ E", answer: false },
+  { question_lin_dp: "B $\\implies$ F", answer: false },
   // C
-  { question: "C $\\implies$ A", answer: true },
-  { question: "C $\\implies$ B", answer: true },
-  { question: "C $\\implies$ D", answer: false },
-  { question: "C $\\implies$ E", answer: false },
-  { question: "C $\\implies$ F", answer: true },
+  { question_lin_dp: "C $\\implies$ A", answer: true },
+  { question_lin_dp: "C $\\implies$ B", answer: true },
+  { question_lin_dp: "C $\\implies$ D", answer: false },
+  { question_lin_dp: "C $\\implies$ E", answer: false },
+  { question_lin_dp: "C $\\implies$ F", answer: true },
   // D
-  { question: "D $\\implies$ A", answer: true },
-  { question: "D $\\implies$ B", answer: true },
-  { question: "D $\\implies$ C", answer: true },
-  { question: "D $\\implies$ E", answer: true },
-  { question: "D $\\implies$ F", answer: true },
+  { question_lin_dp: "D $\\implies$ A", answer: true },
+  { question_lin_dp: "D $\\implies$ B", answer: true },
+  { question_lin_dp: "D $\\implies$ C", answer: true },
+  { question_lin_dp: "D $\\implies$ E", answer: true },
+  { question_lin_dp: "D $\\implies$ F", answer: true },
   // E
-  { question: "E $\\implies$ A", answer: true },
-  { question: "E $\\implies$ B", answer: true },
-  { question: "E $\\implies$ C", answer: true },
-  { question: "E $\\implies$ D", answer: false },
-  { question: "E $\\implies$ F", answer: true },
+  { question_lin_dp: "E $\\implies$ A", answer: true },
+  { question_lin_dp: "E $\\implies$ B", answer: true },
+  { question_lin_dp: "E $\\implies$ C", answer: true },
+  { question_lin_dp: "E $\\implies$ D", answer: false },
+  { question_lin_dp: "E $\\implies$ F", answer: true },
 
   // F implies...
-  { question: "F $\\implies$ A", answer: true },
-  { question: "F $\\implies$ B", answer: true },
-  { question: "F $\\implies$ C", answer: true },
-  { question: "F $\\implies$ D", answer: false },
-  { question: "F $\\implies$ E", answer: false }
+  { question_lin_dp: "F $\\implies$ A", answer: true },
+  { question_lin_dp: "F $\\implies$ B", answer: true },
+  { question_lin_dp: "F $\\implies$ C", answer: true },
+  { question_lin_dp: "F $\\implies$ D", answer: false },
+  { question_lin_dp: "F $\\implies$ E", answer: false }
 ];
 
 const container = document.getElementById("quiz-container");
@@ -87,7 +87,7 @@ questions.forEach((q, i) => {
   
   // Create True False buttons
   div.innerHTML = `
-    <p><b>Q${i + 1}.</b> ${q.question}</p>
+    <p><b>Q${i + 1}.</b> ${q.question_lin_dp}</p>
     <button style="font-size: 1.1em; padding: 5px 14px;" id="true-${i}" onclick="checkAnswer(${i}, true)">True</button>
     <button style="font-size: 1.1em; padding: 5px 14px;" id="false-${i}" onclick="checkAnswer(${i}, false)">False</button>
     <span id="feedback-${i}" style="min-width: 100px; margin-left: 30px;"></span>
@@ -102,7 +102,7 @@ questions.forEach((q, i) => {
 }
 );
 
-const savedAnswer = localStorage.getItem(`question-${i}`);
+const savedAnswer = localStorage.getItem(`question_lin_dp-${i}`);
 if (savedAnswer !== null) {
   checkAnswer(i, savedAnswer === 'true', true); // true = restoring
 }
