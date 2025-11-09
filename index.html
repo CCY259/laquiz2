@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<head>
+  <script src="http://math.chapman.edu/~jipsen/latexmathjax/latexmathjax.js"></script>
+    <link rel="stylesheet" type="text/css"
+    href="http://math.chapman.edu/~jipsen/latexmathjax/latexmathjax.css" />
+  <style>
+  body {
+    font-size: 1.4em; 
+    margin: 50px;
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+  .correct {
+    background-color: #388e3c;
+    border: 2px solid #388e3c;
+    color: black;
+  }
+
+  .wrong {
+    background-color: #d32f2f;
+    border: 2px solid #d32f2f;
+    color: black;
+  }
+
+  button:disabled {
+    opacity: 0.8;
+  }
+  p {
+    text-indent: 0;
+  }
+  </style>
+</head>
+<body>
+  <h1>Linear Algebra Quiz: Linear Dependence</h1>
+  <div>The quiz should be completed within 30 minutes.</div>
+  <div id="quiz-container"></div>
+
+
+  <div id="score-summary"></div>
+  <script src="quiz.js"></script>
+
+  <button style="margin-top: 50px; margin-bottom: 50px;" onclick="localStorage.clear(); location.reload();">
+  🔄 Reset Progress
+</button>
+
+</body>
+</html>
+
+<script>
+window.addEventListener("DOMContentLoaded", () => {
+  // Restore saved answers
+  questions.forEach((q, i) => {
+    const saved = localStorage.getItem(`question-${i}`);
+    if (saved !== null) {
+      const selected = saved === "true";
+      const trueBtn = document.getElementById(`true-${i}`);
+      const falseBtn = document.getElementById(`false-${i}`);
+      const feedback = document.getElementById(`feedback-${i}`);
+      const correct = questions[i].answer;
+
+      // Prevent double disable
+      if (trueBtn && falseBtn && !trueBtn.disabled && !falseBtn.disabled) {
+        trueBtn.disabled = true;
+        falseBtn.disabled = true;
+
+        const selectedBtn = selected ? trueBtn : falseBtn;
+        selectedBtn.classList.add(selected === correct ? "correct" : "wrong");
+
+        const isCorrect = selected === correct;
+        feedback.innerHTML = isCorrect ? "(¦3[▓▓]" : "＼(・｀(エ)・)/ ";
+
+        answeredCount++;
+        if (isCorrect) correctCount++;
+
+        if (answeredCount === questions.length) {
+    let grade;
+    if (correctCount == questions.length) grade = 'Genius Level! I love you so matcha.';
+    else if (correctCount >= questions.length-3) grade = 'So close! Give you a chocolatte.';
+    else if (correctCount >= questions.length-7) grade = 'Good Job. Give you a cookie. Crooked Hillary.';
+    else if (correctCount >= questions.length-10) grade = 'Masih memuaskan. Kasih satu nasi lemak.';
+    else if (correctCount >= questions.length-15) grade = 'Need more practice!';
+    else grade = 'Hello what happen? Habis lah!';
+    scoreBox.innerHTML = `<div style="font-size: 1.5em; font-weight: bold; margin-top: 50px; margin-bottom: 50px;">
+    You got ${correctCount} out of ${questions.length} correct. ${grade}
+    </div>`
+  }
+      }
+
+
+    }
+  });
+
+  // Override checkAnswer to save answers automatically
+  const originalCheck = window.checkAnswer;
+  window.checkAnswer = function(index, selected) {
+    localStorage.setItem(`question-${index}`, selected);
+    originalCheck(index, selected);
+  };
+});
+</script>
+
+<script>
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  document.addEventListener('keydown', e => {
+    if (e.ctrlKey && (e.key === 'u' || e.key === 's' || e.key === 'Shift' || e.key === 'I' || e.key === "F12")) {
+      e.preventDefault();
+    }
+  });
+</script>
+
